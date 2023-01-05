@@ -1,1 +1,1 @@
-SOuthBarbol.github.io
+SouthBarbol.github.io
