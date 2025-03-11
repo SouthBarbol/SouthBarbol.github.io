@@ -1000,6 +1000,23 @@ a:hover {
   font-size: 1.2rem;
 }
 
+.work-hover {
+  transition: transform 0.3s ease-in-out;
+}
+.work-hover:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.work-link img.plus-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.work-link:hover img.plus-icon {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
