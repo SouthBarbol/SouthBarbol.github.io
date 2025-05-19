@@ -1121,10 +1121,15 @@ a:hover {
   transform: translateY(-50%) scale(1.2); /* Efecto de agrandamiento */
 }
 
-.swiper-button-prev::after,
+.swiper-button-prev::after {
+  font-size: 28px; /* Tamaño del ícono */
+  font-weight: bold; /* Ícono más visible */
+  transform: translateX(-3px); /* Desplaza el ícono hacia la derecha */
+}
 .swiper-button-next::after {
   font-size: 28px; /* Tamaño del ícono */
   font-weight: bold; /* Ícono más visible */
+  transform: translateX(3px); /* Desplaza el ícono hacia la izquierda */
 }
 
 /*--------------------------------------------------------------
