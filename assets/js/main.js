@@ -162,17 +162,22 @@
    * Intro type effect
    */
   const typed = select('.typed')
-  if (typed) {
-    let typed_strings = typed.getAttribute('data-typed-items')
-    typed_strings = typed_strings.split(',')
-    new Typed('.typed', {
-      strings: typed_strings,
+  let typedInstance = null
+  const startTyped = () => {
+    if (!typed) return
+    if (typedInstance) typedInstance.destroy()
+    typed.textContent = ''
+    typedInstance = new Typed('.typed', {
+      strings: typed.getAttribute('data-typed-items').split(','),
       loop: true,
       typeSpeed: 100,
       backSpeed: 50,
       backDelay: 2000
     });
   }
+  startTyped()
+  // Lo usa el traductor (i18n.js) para reiniciar el texto animado al cambiar de idioma
+  window.restartTyped = startTyped
 
   /**
    * Initiate portfolio lightbox 
@@ -206,13 +211,15 @@
   /**
    * Portfolio details slider
    */
-  new Swiper('.portfolio-details-slider', {
+  const detailsSlider = new Swiper('.portfolio-details-slider', {
     speed: 400,
     loop: true,
     autoplay: {
       delay: 6000,
       disableOnInteraction: true
     },
+    // Arrastrar la barra de progreso / volumen de un <video> no debe mover el slide
+    noSwipingSelector: 'video',
     pagination: {
       el: '.swiper-pagination',
       type: 'bullets',
@@ -223,6 +230,46 @@
       prevEl: '.swiper-button-prev',
     }
   });
+
+  /**
+   * Vídeos dentro del slider: si se da al play se detiene el autoplay (antes el
+   * slide se iba a los 6 s con el vídeo sonando fuera de pantalla) y al cambiar
+   * de slide se pausa cualquier vídeo.
+   */
+  if (detailsSlider && detailsSlider.el instanceof HTMLElement) {
+    detailsSlider.el.addEventListener('play', (e) => {
+      if (e.target.tagName === 'VIDEO' && detailsSlider.autoplay) detailsSlider.autoplay.stop()
+    }, true) // 'play' no hace bubbling, hay que escucharlo en la fase de captura
+    detailsSlider.on('slideChange', () => {
+      detailsSlider.el.querySelectorAll('video').forEach(v => v.pause())
+    })
+  }
+
+  /**
+   * PDF incrustado (GreenBeer): botón de pantalla completa + alternativa cuando
+   * el navegador no puede mostrar PDFs dentro de la página (móviles Android/iOS).
+   */
+  const pdfFrame = select('#pdfFrame')
+  if (pdfFrame) {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    const canInlinePdf = navigator.pdfViewerEnabled !== false && !isIOS
+    const fsBtn = select('#pdfFullscreenBtn')
+    const requestFs = pdfFrame.requestFullscreen || pdfFrame.webkitRequestFullscreen
+
+    if (!canInlinePdf) {
+      select('#pdfViewer').style.display = 'none'
+      select('#pdfHint').style.display = 'none'
+      select('#pdfFallback').style.display = ''
+      select('.pdf-actions').style.display = 'none' // el enlace de #pdfFallback ya abre el PDF
+    } else if (fsBtn) {
+      if (requestFs) {
+        fsBtn.addEventListener('click', () => requestFs.call(pdfFrame))
+      } else {
+        fsBtn.style.display = 'none' // sin API de pantalla completa: queda "Open in new tab"
+      }
+    }
+  }
 
   /**
    * Preloader

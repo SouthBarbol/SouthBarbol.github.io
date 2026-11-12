@@ -108,24 +108,26 @@
         <div class="row gy-4">
 
           <div class="col-lg-8">
-            <div style="width:100%;height:80vh;position:relative;">
-              <button 
-                onclick="document.getElementById('pdfFrame').requestFullscreen()" 
-                style="position:absolute;top:10px;right:150px;z-index:2;padding:6px 12px;border:none;background:#F29900;color:#000000;border-radius:4px;cursor:pointer;">
-                <strong>Fullscreen</strong> 
-              </button>
-              <iframe 
+            <div class="pdf-actions">
+              <button type="button" id="pdfFullscreenBtn" class="pdf-btn"><strong>Fullscreen</strong></button>
+              <a href="GreenBeer-Case%20study.pdf" target="_blank" rel="noopener" class="pdf-btn"><strong>Open in new tab</strong></a>
+            </div>
+            <div id="pdfViewer" style="width:100%;height:80vh;position:relative;">
+              <iframe
                 id="pdfFrame"
                 src="GreenBeer-Case%20study.pdf"
-                width="100%" 
-                height="100%" 
+                width="100%"
+                height="100%"
                 style="border:none;"
                 title="GreenBeer Case Study PDF"
-                allow="fullscreen"
-                allowfullscreen>
+                allow="fullscreen">
               </iframe>
             </div>
-            <p class="text-center mt-4">
+            <p id="pdfFallback" class="text-center mt-4" style="display:none;">
+              Your browser can't show the PDF inside the page.
+              <a href="GreenBeer-Case%20study.pdf" target="_blank" rel="noopener"><strong>Open the GreenBeer Case Study (PDF)</strong></a>
+            </p>
+            <p id="pdfHint" class="text-center mt-4">
               Click the button "Fullscreen" above to view the project in fullscreen mode.
             </p>
           </div>
@@ -211,6 +213,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Traductor EN/ES (va después de main.js) -->
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/i18n.js"></script>
 
 </body>
 

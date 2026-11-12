@@ -119,8 +119,8 @@
 
                 <div class="swiper-slide">
                   <video id="reproductor" width="700" height="350"
-                  controls>
-                  <source src="assets/img/chvideo.mp4"  class="img-fluid" alt="Video showing the course of a common game">
+                  controls preload="metadata" aria-label="Video showing the course of a common game">
+                  <source src="assets/img/chvideo.mp4" type="video/mp4">
                 </video>
                   <p class="s-description text-center">
                     <i>Playing the game and showing its features</i>
@@ -142,7 +142,6 @@
                 <li><strong>Category</strong>: Android Videogame</li>
                 <li><strong>Engine</strong>: Unity</li>
                 <li><strong>Project date</strong>: 10 Jan, 2023</li>
-                <li><strong>Project URL</strong>: <a href="https://play.google.com/store/apps/details?id=com.ChubbyCat.com.unity.template.mobile2D&hl=es_DO">Try it here free! (Google Play external link)</a></li>
                 <li><strong>Software</strong>: Unity Mobile, Procreate, Adobe Photoshop, Github, Ableton Live</li>
               </ul>
             </div>
@@ -201,6 +200,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Traductor EN/ES (va después de main.js) -->
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/i18n.js"></script>
 
 </body>
 

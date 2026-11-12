@@ -1548,3 +1548,93 @@ footer .credits {
 footer .credits a {
   color: #fff;
 }
+
+/*--------------------------------------------------------------
+# PDF embebido (GreenBeer)
+--------------------------------------------------------------*/
+.pdf-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pdf-btn {
+  padding: 6px 12px;
+  border: none;
+  background: #F29900;
+  color: #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.pdf-btn:hover,
+.pdf-btn:focus {
+  background: #ffb02e;
+  color: #000000;
+}
+
+/*--------------------------------------------------------------
+# Selector de idioma (EN / ES)
+--------------------------------------------------------------*/
+.navbar .lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar .lang-switch button {
+  background: none;
+  border: 0;
+  padding: 0 0 2px 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.55;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.navbar .lang-switch button:hover,
+.navbar .lang-switch button:focus-visible {
+  opacity: 1;
+}
+
+.navbar .lang-switch button[aria-pressed="true"] {
+  opacity: 1;
+  border-bottom-color: #fff;
+}
+
+.navbar .lang-switch .lang-sep {
+  color: #fff;
+  opacity: 0.55;
+}
+
+.navbar-mobile .lang-switch {
+  padding: 10px 20px;
+}
+
+.navbar-mobile .lang-switch button,
+.navbar-mobile .lang-switch .lang-sep {
+  color: #4e4e4e;
+  font-size: 15px;
+}
+
+.navbar-mobile .lang-switch button[aria-pressed="true"] {
+  color: #0078ff;
+  border-bottom-color: #0078ff;
+}
+
+/* El menú en español es más largo: entre 992 y 1199 px se estrecha el espacio
+   entre enlaces (solo en ES) para que el logo no se parta en dos líneas. */
+@media (min-width: 992px) and (max-width: 1199px) {
+  html[lang="es"] .navbar>ul>li {
+    padding-left: 18px;
+  }
+}
